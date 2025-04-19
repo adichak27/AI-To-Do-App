@@ -5,4 +5,8 @@ from typing import List
 class Todo:
     id: int
     title: str
-    completed: bool 
+    completed: bool
+
+@strawberry.type
+class DeleteTodoResponse:
+    id: int 

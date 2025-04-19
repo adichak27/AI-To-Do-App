@@ -110,7 +110,10 @@ export function TodoList() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => deleteTodo({ variables: { id: todo.id } })}
+                      onClick={() => deleteTodo({
+                        variables: { id: todo.id },
+                        refetchQueries: [{ query: GET_TODOS }]
+                      })}
                       className="opacity-0 transition-opacity group-hover:opacity-100"
                     >
                       <Trash2 className="h-4 w-4 text-[#FF3B3B]" />
