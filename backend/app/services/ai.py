@@ -11,8 +11,8 @@ async def generate_todo_suggestion(context: str) -> str:
         response = await client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that suggests todo items."},
-                {"role": "user", "content": f"Suggest a todo item related to: {context}"}
+                {"role": "system","content": "You are a helpful assistant that only responds with a short, actionable todo item. Do not explain it or add extra text."},
+                {"role": "user","content": f"Based on the following todos, suggest one more short todo:\n\n{context}"}
             ]
         )
         return response.choices[0].message.content

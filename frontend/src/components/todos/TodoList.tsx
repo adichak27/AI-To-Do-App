@@ -8,9 +8,17 @@ import { Todo } from '@/types/todo';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Trash2, Plus, ClipboardIcon, Sparkles } from 'lucide-react';
+import { Trash2, Plus, ClipboardIcon, Sparkles, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { ToggleButton } from "@/components/ui/toggle-button"
+
+// Add this to your existing styles (you can add it directly in the component)
+const checkmarkAnimation = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+  transition: { type: "spring", stiffness: 300, damping: 20 }
+};
 
 export function TodoList() {
   const [newTodo, setNewTodo] = useState('');
@@ -100,30 +108,27 @@ export function TodoList() {
                              bg-white p-4 hover:bg-[#F9FAFC]"
                   >
                     <div className="flex items-center gap-3">
-                      <button
+                      <ToggleButton
                         onClick={() => toggleTodo({ variables: { id: todo.id } })}
-                        className={`h-5 w-5 rounded-full border-2 transition-all
-                                ${todo.completed 
-                                  ? 'border-[#18C964] bg-[#18C964]' 
-                                  : 'border-[#5F6580]'}`}
+                        data-state={todo.completed ? 'checked' : 'unchecked'}
+                        className={todo.completed 
+                          ? 'border-[#18C964]' 
+                          : 'border-[#5F6580]'
+                        }
                       >
                         {todo.completed && (
-                          <motion.svg
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="h-3 w-3 text-white"
-                            viewBox="0 0 12 12"
+                          <motion.div
+                            initial="initial"
+                            animate="animate"
+                            variants={checkmarkAnimation}
                           >
-                            <path
-                              fill="currentColor"
-                              d="M3.5 6.5l2 2 4-4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
+                            <Check 
+                              size={12} 
+                              className="text-white" 
                             />
-                          </motion.svg>
+                          </motion.div>
                         )}
-                      </button>
+                      </ToggleButton>
                       <span
                         className={`text-base text-[#1A1D2F] transition-all
                                 ${todo.completed 
