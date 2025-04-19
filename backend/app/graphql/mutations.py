@@ -4,9 +4,39 @@ from datetime import datetime, timezone
 from .types import Todo
 from ..database.session import get_db
 from ..database.models import TodoModel
+from ..services.ai import generate_todo_suggestion
 
 @strawberry.type
 class Mutation:
+    @strawberry.mutation
+    async def generate_todo(self) -> Todo:
+        db = next(get_db())
+        try:
+            # Get existing todos
+            existing_todos = db.query(TodoModel).all()
+            todos_context = "\n".join([f"- {todo.title}" for todo in existing_todos])
+            
+            # Generate new todo using AI
+            prompt = f"Based on these existing todos:\n{todos_context}\nSuggest a new, related todo task."
+            new_todo_title = await generate_todo_suggestion(prompt)
+            
+            # Create new todo
+            todo = TodoModel(
+                title=new_todo_title,
+                completed=False,
+                created_at=datetime.now(timezone.utc)
+            )
+            db.add(todo)
+            db.commit()
+            db.refresh(todo)
+            
+            return Todo(id=todo.id, title=todo.title, completed=todo.completed)
+        except Exception as e:
+            db.rollback()
+            raise Exception(f"Failed to generate todo: {str(e)}")
+        finally:
+            db.close()
+
     @strawberry.mutation
     def create_todo(self, title: str) -> Todo:
         db = next(get_db())

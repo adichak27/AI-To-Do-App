@@ -1,14 +1,14 @@
-import openai
 import os
 from dotenv import load_dotenv
-
+from openai import AsyncOpenAI
 load_dotenv()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 async def generate_todo_suggestion(context: str) -> str:
     try:
-        response = await openai.ChatCompletion.create(
+        response = await client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that suggests todo items."},

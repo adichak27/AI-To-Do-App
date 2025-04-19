@@ -25,4 +25,14 @@ export const TOGGLE_TODO = gql`
       completed
     }
   }
+`;
+
+export const GENERATE_TODO = gql`
+  mutation GenerateTodo {
+    generateTodo {
+      id
+      title
+      completed
+    }
+  }
 `; 

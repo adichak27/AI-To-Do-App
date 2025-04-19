@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_TODOS } from '@/graphql/queries/todos';
-import { CREATE_TODO, DELETE_TODO, TOGGLE_TODO } from '@/graphql/mutations/todos';
+import { CREATE_TODO, DELETE_TODO, TOGGLE_TODO, GENERATE_TODO } from '@/graphql/mutations/todos';
 import { Todo } from '@/types/todo';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -18,11 +18,15 @@ export function TodoList() {
   const [createTodo] = useMutation(CREATE_TODO);
   const [deleteTodo] = useMutation(DELETE_TODO);
   const [toggleTodo] = useMutation(TOGGLE_TODO);
+  const [generateTodo] = useMutation(GENERATE_TODO, {
+    refetchQueries: [{ query: GET_TODOS }]
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTodo.trim()) return;
 
+    // Using refetch for now for simplicity. Could optimize with cache update or optimistic response. 
     await createTodo({
       variables: { title: newTodo },
       refetchQueries: [{ query: GET_TODOS }],
@@ -110,6 +114,7 @@ export function TodoList() {
                     <Button
                       variant="ghost"
                       size="icon"
+                      // Using refetch for now for simplicity. Could optimize with cache update or optimistic response. 
                       onClick={() => deleteTodo({
                         variables: { id: todo.id },
                         refetchQueries: [{ query: GET_TODOS }]
@@ -130,11 +135,9 @@ export function TodoList() {
                 hover:shadow-[0_0_15px_rgba(84,104,255,0.4)] hover:scale-[1.02]
                 active:scale-[0.98] transition-all duration-200 
                 flex items-center justify-center"
-            onClick={() => {
-              // Implement AI todo generation
-            }}
+            onClick={() => generateTodo()}
           >
-          <Sparkles className="mr-2" size={18} />
+            <Sparkles className="mr-2" size={18} />
             Generate Todo
           </Button>
         </Card>
