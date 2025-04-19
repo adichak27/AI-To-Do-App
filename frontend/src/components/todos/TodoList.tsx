@@ -105,7 +105,7 @@ export function TodoList() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     className="group flex items-center justify-between rounded-lg 
-                             bg-white p-4 hover:bg-[#F9FAFC]"
+                             bg-white py-2.5 px-4 hover:bg-[#F9FAFC]"
                   >
                     <div className="flex items-center gap-3">
                       <ToggleButton
