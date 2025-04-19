@@ -5,7 +5,6 @@ load_dotenv()
 
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
 async def generate_todo_suggestion(context: str) -> str:
     try:
         response = await client.chat.completions.create(

@@ -8,7 +8,7 @@ import { Todo } from '@/types/todo';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Trash2, Plus, ClipboardIcon, Sparkles, Check } from 'lucide-react';
+import { Trash2, Plus, Sparkles, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ToggleButton } from "@/components/ui/toggle-button"
