@@ -7,6 +7,7 @@ export interface ToggleButtonProps
   asChild?: boolean
 }
 
+// Used to toggle the todo item
 const ToggleButton = React.forwardRef<HTMLButtonElement, ToggleButtonProps>(
   ({ className, ...props }, ref) => {
     return (

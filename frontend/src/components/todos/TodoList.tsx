@@ -13,7 +13,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ToggleButton } from "@/components/ui/toggle-button"
 
-// Add this to your existing styles (you can add it directly in the component)
 const checkmarkAnimation = {
   initial: { scale: 0 },
   animate: { scale: 1 },
@@ -33,7 +32,6 @@ export function TodoList() {
     }
     return false
   });
-
   const [generateTodo] = useMutation(GENERATE_TODO, {
     refetchQueries: [{ query: GET_TODOS }],
     onCompleted: () => {
@@ -78,12 +76,14 @@ export function TodoList() {
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add a new task..."
+          maxLength={100}
           className="h-[52px] rounded-[14px] border-[#00000014] pl-4 pr-[100px] text-base 
                    focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0
                    focus:border-[#5468FF] focus:shadow-[inset_0px_0px_0px_2px_rgba(84,104,255,0.1)]"
         />
         <Button
           type="submit"
+          disabled={!newTodo.trim()}
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#5468FF] 
                    hover:bg-[#4355E8]"
         >
@@ -96,6 +96,7 @@ export function TodoList() {
           <EmptyState />
         ) : (
           <ul className="space-y-4">
+            {/* Map through todos and render each todo */}
             {data?.todos.map((todo: Todo) => (
               <motion.li
                 key={todo.id}
@@ -167,6 +168,7 @@ export function TodoList() {
         disabled={isGenerating}
       >
         {isGenerating ? (
+          // Loading animation
           <div className="flex items-center">
             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

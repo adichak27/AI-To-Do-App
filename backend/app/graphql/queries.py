@@ -6,6 +6,7 @@ from ..database.models import TodoModel
 
 @strawberry.type
 class Query:
+    # Get all todos on initial load
     @strawberry.field
     def todos(self) -> List[Todo]:
         db = next(get_db())

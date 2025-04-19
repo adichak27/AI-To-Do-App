@@ -6,7 +6,7 @@ from .graphql.schema import schema
 from strawberry.fastapi import GraphQLRouter
 from .config import settings
 
-# Create database tables
+# Create empty database table on initial startup
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
