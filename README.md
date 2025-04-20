@@ -1,4 +1,4 @@
-# 📝 AI-To-Do-App — AI-Powered Todo App
+# 📝 AI-Powered Todo App
 
 AI-To-Do-App is a modern full-stack todo application that leverages **React**, **GraphQL**, and **OpenAI** to help users manage and generate intelligent todos. The app features a clean UI, fast performance, and several additional enhancements implemented for an optimized user experience.
 
@@ -53,27 +53,12 @@ cd AI-To-Do-App
 
 ### 2. **Set Environment Variables**
 
-Populate the provided `env.template` files in both the `frontend` and `backend` directories.
+Populate the provided `env.template` with your openai api key.  and rename it to `.env`
 
-#### `frontend/env.template`
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000/graphql
-```
-
-#### `backend/env.template`
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
-CORS_ORIGINS=["http://localhost:3000"]
+OPENAI_API_KEY=your_openai_api_key # Get one at https://platform.openai.com/account/api-keys
 DATABASE_URL=sqlite:///./todo.db
-```
-
-Then rename them:
-
-```bash
-cp frontend/env.template frontend/.env.local
-cp backend/env.template backend/.env
 ```
 
 ### 3. **Run the App Locally with Docker**
@@ -82,26 +67,6 @@ cp backend/env.template backend/.env
 docker compose up --build
 ```
 
-Once complete, visit:
-
-- 🌐 Frontend: [http://localhost:3000](http://localhost:3000)
-- 🔌 Backend GraphQL API: [http://localhost:8000/graphql](http://localhost:8000/graphql)
+Once complete, visit: [http://localhost:3000](http://localhost:3000)
 
 ---
-
-## 📦 Project Structure
-
-```
-AI-To-Do-App/
-├── frontend/        → Next.js frontend
-├── backend/         → FastAPI backend
-├── docker-compose.yml
-├── README.md
-```
-
----
-
-## 💬 Contact
-
-Maintained by [Your Name].  
-Pull requests and suggestions are welcome!
