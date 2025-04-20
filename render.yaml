@@ -1,0 +1,28 @@
+services:
+  # Backend API service
+  - type: web
+    name: sparktask-api
+    runtime: python
+    buildCommand: pip install poetry && poetry install --no-interaction --no-ansi
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: OPENAI_API_KEY
+        sync: false # Indicates this is a secret that needs to be set manually
+      - key: DATABASE_URL
+        value: sqlite:///./todo.db
+      - key: CORS_ORIGINS
+        value: '["https://sparktask.onrender.com"]'
+
+  # Frontend Next.js app
+  - type: web
+    name: sparktask
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: next start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://sparktask-api.onrender.com/graphql 

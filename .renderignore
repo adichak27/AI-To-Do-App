@@ -1,0 +1,44 @@
+# Dependencies
+**/node_modules
+**/.venv
+**/__pycache__
+
+# Environment files
+**/.env*
+!**/.env.template
+
+# Development files
+**/.git
+**/.gitignore
+**/.dockerignore
+**/docker-compose.yml
+**/Dockerfile
+**/.next
+**/dist
+**/build
+
+# IDE files
+**/.vscode
+**/.idea
+**/*.swp
+**/*.swo
+
+# Database files
+**/*.db
+**/instance
+
+# Test files
+**/tests
+**/__tests__
+**/coverage
+
+# Documentation
+**/docs
+**/LICENSE
+
+# Logs
+**/logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log* 
