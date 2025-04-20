@@ -42,6 +42,12 @@ AI-To-Do-App is a modern full-stack todo application that leverages **React**, *
 
 ---
 
+## 📦 Prerequisites
+
+To run this project locally, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+
+---
+
 ## 🛠️ Getting Started
 
 ### 1. **Clone the Repository**
@@ -57,11 +63,14 @@ Populate the provided `env.template` with your openai api key.  and rename it to
 
 
 ```env
-OPENAI_API_KEY=your_openai_api_key # Get one at https://platform.openai.com/account/api-keys
+OPENAI_API_KEY=your_openai_api_key # Available at https://platform.openai.com/account/api-keys
 DATABASE_URL=sqlite:///./todo.db
 ```
 
+
 ### 3. **Run the App Locally with Docker**
+
+
 
 ```bash
 docker compose up --build
