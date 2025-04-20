@@ -53,7 +53,7 @@ To run this project locally, you must have [Docker Desktop](https://www.docker.c
 ### 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/AI-To-Do-App.git
+git clone https://github.com/adichak27/AI-To-Do-App.git
 cd AI-To-Do-App
 ```
 
